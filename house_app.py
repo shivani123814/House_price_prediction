@@ -3,7 +3,7 @@ import pickle
 import numpy as np
 
 # Load trained model
-model = pickle.load(open('house_price_prediction.pkl', 'rb'))
+model = pickle.load(open("house_price_prediction.pkl", 'rb'))
 
 # Page configuration
 st.set_page_config(page_title="House Price Prediction")
