@@ -1,32 +1,30 @@
 import streamlit as st
-import pickle
+import joblib
 import numpy as np
 
-# Load model
-with open("house_price_prediction.pkl", "rb") as file:
-    model = pickle.load(file)
+# Load trained model
+model = joblib.load("house_price_prediction.pkl")
 
-# Title
+# Page title
 st.title("🏠 House Price Prediction System")
 
-# Input
+st.write("Enter area to predict house price")
+
+# User input
 area = st.number_input(
     "Enter Area (sq.ft)",
     min_value=100,
     step=10
 )
 
-# Predict Button
+# Prediction button
 if st.button("Predict Price"):
 
-    # Prepare input
+    # Convert input to 2D array
     input_data = np.array([[area]])
 
-    # Prediction
+    # Predict
     prediction = model.predict(input_data)
 
-    # Convert prediction into float
-    predicted_price = float(prediction[0])
-
-    # Display Result
-    st.success(f"Estimated House Price: ₹ {predicted_price}")
+    # Display result
+    st.success(f"Estimated House Price: ₹ {prediction[0]}")
